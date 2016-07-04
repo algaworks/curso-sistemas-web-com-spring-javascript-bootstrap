@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	xmlns:th="http://www.thymeleaf.org"
+	layout:decorator="'layout/LayoutPadrao'">
+
+<head>
+	<title>Cadastro de cliente</title>
+</head>
+
+<section layout:fragment="conteudo">
+
+	<div class="page-header">
+		<div class="container-fluid">
+			<h1>
+				Cadastro de cliente
+			</h1>
+		</div>
+	</div>
+
+	<div class="container-fluid">
+		<form>
+			<div class="row">
+				<div class="form-group  col-sm-12">
+					<label for="nome">Nome</label>
+					<input type="text" class="form-control" id="nome" autofocus="autofocus"/>
+				</div>
+			</div>
+			
+			<div class="row">
+				<div class="form-group  col-sm-4">
+					<label>Tipo pessoa</label> 
+					<div>
+						<div class="radio  radio-inline">
+							<input type="radio" name="tipoPessoa"> 
+							<label>Física</label>
+						</div>
+						<div class="radio  radio-inline">
+							<input type="radio" name="tipoPessoa"> 
+							<label>Juridica</label>
+						</div>
+					</div>
+				</div>
+				
+				<div class="form-group  col-sm-8" >
+					<label for="cpfOuCnpj">CPF/CNPJ</label>
+					<input type="text" class="form-control" id="cpfOuCnpj"/>
+				</div>
+			</div>
+			
+			<div class="row">
+				<div class="form-group  col-sm-4">
+					<label for="telefone">Telefone</label>
+					<input type="text" class="form-control" id="telefone"/>
+				</div>
+				
+				<div class="form-group  col-sm-8">
+					<label for="email">E-mail</label>
+					<input type="text" class="form-control" id="email"/>
+				</div>
+			</div>
+			
+			<div class="row">
+				<div class="form-group  col-sm-4">
+					<label for="logradouro">Logradouro</label>
+					<input type="text" class="form-control" id="logradouro"/>
+				</div>
+				
+				<div class="form-group  col-sm-4">
+					<label for="numero">Número</label>
+					<input type="text" class="form-control" id="numero"/>
+				</div>
+				
+				<div class="form-group  col-sm-4">
+					<label for="complemento">Complemento</label>
+					<input type="text" class="form-control" id="complemento"/>
+				</div>
+			</div>
+			
+			<div class="row">
+				<div class="form-group  col-sm-4">
+					<label for="cep">CEP</label>
+					<input type="text" class="form-control" id="cep"/>
+				</div>
+				
+				<div class="form-group  col-sm-4">
+					<label for="estado">Estado</label>
+					<select id="estado" class="form-control">
+	                    <option value="">Selecione o estado</option>
+	                </select>
+				</div>
+				
+				<div class="form-group  col-sm-4">
+					<label  for="cidade">Cidade</label>
+					<select id="cidade" class="form-control">
+						<option value="">Selecione a cidade</option>
+					</select>
+				</div>
+			</div>
+			
+			<button type="submit" class="btn  btn-primary">Salvar</button>				
+		</form>
+	</div>
+</section>
+
+</html>
