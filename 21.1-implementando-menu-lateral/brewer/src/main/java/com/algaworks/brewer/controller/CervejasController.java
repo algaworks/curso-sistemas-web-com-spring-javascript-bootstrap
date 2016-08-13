@@ -49,8 +49,7 @@ public class CervejasController {
 	@RequestMapping(value = "/novo", method = RequestMethod.POST)
 	public ModelAndView cadastrar(@Valid Cerveja cerveja, BindingResult result, Model model, RedirectAttributes attributes) {
 		if (result.hasErrors()) {
-			throw new RuntimeException();
-//			return novo(cerveja);
+			return novo(cerveja);
 		}
 		
 		cadastroCervejaService.salvar(cerveja);
