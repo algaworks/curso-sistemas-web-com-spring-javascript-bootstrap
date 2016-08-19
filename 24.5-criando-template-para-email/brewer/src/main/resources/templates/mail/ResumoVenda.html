@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+
+<body style="font-family: Arial; font-size: 14px;">
+	
+	<p style="text-align: right">
+		<img src="../../static/images/logo-gray.png"/>
+	</p>
+
+	<h1 style="font-size: 22px">Olá Maria!</h1>
+	
+	<p>
+		Estamos enviando para você a relação de itens da sua compra em nossa loja de cervejas.
+	</p>
+	
+	<table style="width: 100%; border-collapse: collapse;  margin: 20px 0">
+		<th:block th:each="item : ${venda.itens}">
+			<tr style="border-bottom: 1px solid #ccc; border-top: 1px solid #ccc">
+				<td style="width: 50px; padding-bottom: 10px; padding-top: 10px">
+					<img style="width: 40px" src="../../static/images/cerveja-mock.png" />
+				</td>
+				<td style="vertical-align: top; padding-bottom: 10px; padding-top: 10px">
+					<div style="display: block; font-weight: bold; font-size: 16px">Bhrama Lata 350 ml</div>
+					<div style="color: #8e8e8e">Nacional</div>
+					<div style="color: #8e8e8e">1 x R$1,90</div>
+				</td>
+				<td style="vertical-align: top; text-align: right; padding-bottom: 10px; padding-top: 10px">
+					<span style="display: block; font-weight: bold; font-size: 16px">R$1,90</span>
+				</td>
+			</tr>
+			
+			<th:block th:if="${false}">
+				<tr style="border-bottom: 1px solid #ccc; border-top: 1px solid #ccc">
+					<td style="width: 50px; padding-bottom: 10px; padding-top: 10px">
+						<img style="width: 40px" src="../../static/images/cerveja-mock.png" />
+					</td>
+					<td style="vertical-align: top; padding-bottom: 10px; padding-top: 10px">
+						<div style="display: block; font-weight: bold; font-size: 16px">Heineken</div>
+						<div style="color: #8e8e8e">Internacional</div>
+						<div style="color: #8e8e8e">450 x R$3,93</div>
+					</td>
+					<td style="vertical-align: top; text-align: right; padding-bottom: 10px; padding-top: 10px">
+						<span style="display: block; font-weight: bold; font-size: 16px">R$1.768,50</span>
+					</td>
+				</tr>
+			</th:block>
+		</th:block>
+	</table>
+	
+	<p style="font-size: 12px">
+		* O status da sua compra é: <strong style="color: red"><span>orçamento</span></strong>.
+	</p>
+	
+	<table style="width: 100%;">
+		<tr>
+			<td style="text-align: right; font-weight: bold">Subtotal:</td>
+			<td style="width: 120px; text-align: right">R$1.200,50</td>
+		</tr>
+		<tr>
+			<td style="text-align: right; font-weight: bold">Frete:</td>
+			<td style="width: 100px; text-align: right">
+				<span>R$8,00</span>
+			</td>
+		</tr>
+		<tr>
+			<td style="text-align: right; font-weight: bold">Desconto:</td>
+			<td style="width: 100px; text-align: right"><span>(R$5,00)</span></td>
+		</tr>
+		<tr>
+			<td style="text-align: right; font-weight: bold; font-size: 16px">Total final:</td>
+			<td style="width: 100px; text-align: right; font-weight: bold; font-size: 16px">
+				<span>R$1.200,50</span>
+			</td>
+		</tr>
+	</table>
+	
+	<p>Obrigado.</p>
+	<p>Equipe Brewer!</p>
+</body>
+</html>

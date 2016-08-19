@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout/LayoutPadrao}"
+	xmlns:brewer="http://brewer.algaworks.com">
+
+<head>
+	<title>Cadastro de venda</title>
+</head>
+
+<section layout:fragment="conteudo">
+
+	<div class="page-header">
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-xs-10">
+					<h1>Cadastro de venda</h1>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<div class="container-fluid">
+		<form method="POST" th:action="@{/vendas/nova}">
+			
+			<div class="row">
+				<div class="col-sm-4">
+					<div class="aw-box">
+						<div class="aw-box__icon">
+							<i class="fa  fa-usd  fa-3x"></i>
+						</div>
+						<div class="aw-box__value">R$0,00</div>
+						<div class="aw-box__title">Total</div>
+					</div>
+				</div>
+				
+				<div class="col-sm-4">
+					<div class="aw-box">
+						<div class="aw-box__icon">
+							<i class="fa  fa-tag  fa-3x"></i>
+						</div>
+						<div class="aw-box__value">Orçamento</div>
+						<div class="aw-box__title">Status</div>
+					</div>
+				</div>
+				
+				<div class="col-sm-4">
+					<div class="aw-box">
+						<div class="aw-box__icon">
+							<i class="fa  fa-calendar  fa-3x"></i>
+						</div>
+						<div class="aw-box__value">
+							<span class="js-tooltip">Hoje</span>
+						</div>
+						<div class="aw-box__title">Criação</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="form-group  col-sm-4  bw-required">
+					<label class="control-label" for="nomeCliente">Cliente</label>
+					<div class="input-group">
+				      <input id="nomeCliente" type="text" readonly="readonly" class="form-control" placeholder="Clique na lupa para pesquisar o cliente"/>
+				      <span class="input-group-btn">
+				        <button class="btn  btn-default  js-tooltip" type="button" title="Pesquisa avançada">
+				        	<i class="glyphicon  glyphicon-search"></i>
+				        </button>
+				      </span>
+				    </div>
+				</div>
+				
+				<div class="form-group  col-sm-4 bw-required">
+					<label class="control-label" for="valorFrete">Valor do frete</label>
+					<div class="input-group">
+	      				<div class="input-group-addon">R$</div> 
+						<input type="text" maxlength="14" class="form-control  js-decimal" id="valorFrete"/>
+					</div>
+				</div>
+				
+				<div class="form-group  col-sm-4">
+					<label class="control-label" for="valorDesconto">Valor do desconto</label>
+					<div class="input-group">
+	      				<div class="input-group-addon">R$</div> 
+						<input type="text" maxlength="14" class="form-control  js-decimal" id="valorDesconto"/>
+					</div>
+				</div>
+			</div>
+			
+			<div class="row">
+				<div class="form-group  col-lg-12">
+					<ul class="nav nav-tabs  js-abas-venda">
+					  <li role="presentation" class="active"><a href="#cervejas">Cervejas</a></li>
+					  <li role="presentation"><a href="#entrega">Entrega</a></li>
+					</ul>
+				</div>
+			</div>
+			
+			<div class="tab-content">
+				<div class="tab-pane active" id="cervejas">
+
+					<div class="row">
+						<div class="form-group  col-lg-12">
+							<input type="text" class="form-control" id="cerveja" 
+								placeholder="Pesquise e adicione a cerveja pelo SKU ou nome" autofocus="autofocus" />
+						</div>
+					</div>
+					
+					<div class="bw-tabela-cervejas">
+						<div class="bw-tabela-cervejas__vazio">
+							<i class="glyphicon  glyphicon-shopping-cart"></i> 
+							<span>Você ainda não adicionou nenhuma cerveja.</span>
+						</div>
+					</div>
+				</div>
+				
+				<div class="tab-pane" id="entrega">
+					<div class="row">
+						<div class="form-group  col-sm-3">
+							<label class="control-label" for="dataEntrega">Data da entrega</label>
+							<input type="text" class="form-control" id="dataEntrega"/>
+						</div>
+						
+						<div class="form-group  col-sm-3">
+							<label class="control-label" for="horarioEntrega">Horário de entrega</label>
+							<input type="text" class="form-control" id="horarioEntrega"/>
+						</div>
+					</div>
+					
+					<div class="row">
+						<div class="form-group  col-sm-12">
+							<textarea class="form-control" id="dataEntrega" rows="5" 
+								placeholder="Alguma observação para o entregador desse pedido?"></textarea>
+						</div>
+					</div>
+				</div>
+			</div>
+			
+			<div class="row" style="clear: both">
+				<div class="col-lg-12">
+					<div class="btn-group">
+					  <button type="submit" class="btn  btn-primary">Salvar</button>
+					  <button type="button" class="btn  btn-primary  dropdown-toggle" data-toggle="dropdown">
+					    <span class="caret"></span>
+					  </button>
+					  
+					  <ul class="dropdown-menu">
+					    <li><a href="#">Salvar e emitir</a></li>
+					    <li><a href="#">Salvar e enviar por e-mail</a></li>
+					  </ul>
+					</div>
+				
+					<button class="btn  btn-danger">Cancelar</button>
+				</div>
+			</div>
+		</form>
+	</div>
+</section>
+
+<th:block layout:fragment="javascript-extra">
+<script>
+$(function() {
+	$('.js-abas-venda a').click(function (e) {
+		e.preventDefault();
+		$(this).tab('show');
+	});
+});
+</script>
+</th:block>
+
+</html>

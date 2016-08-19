@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="pt" xmlns="http://www.w3.org/1999/xhtml" 
+	xmlns:th="http://www.thymeleaf.org">
+
+	<div class="bw-tabela-item" th:each="item : ${itens}">
+		<div class="bw-tabela-item__coluna  bw-tabela-item__coluna--foto">
+			<img th:src="@{/fotos/thumbnail.{foto}(foto=${item.cerveja.fotoOuMock})}" class="img-responsive"/>
+		</div>
+		
+		<div class="bw-tabela-item__coluna  bw-tabela-item__coluna--detalhes">
+			<span class="bw-tabela-cerveja-nome" th:text="${item.cerveja.nome}">Negra Modelo Long Neck 355ml</span>
+			<span class="label  label-default" th:text="${item.cerveja.sku}">AA1112</span>
+			<span class="bw-tabela-cerveja-origem" th:text="${item.cerveja.origem.descricao}">Importada</span>
+		</div>
+		
+		<div class="bw-tabela-item__coluna  bw-tabela-item__coluna--valores">
+			<div class="bw-tabela-cerveja-valor-pequeno">
+				<input type="text" maxlength="3" class="bw-tabela-cerveja-campo-quantidade" value="1"/>
+				<span>x R$[[${{item.valorUnitario}}]]</span>
+			</div>
+			<div class="bw-tabela-cerveja-valor-grande">R$[[${{item.valorTotal}}]]</div>
+		</div>
+	
+	</div>
+</html>
