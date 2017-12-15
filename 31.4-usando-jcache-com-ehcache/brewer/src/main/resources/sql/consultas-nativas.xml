@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<entity-mappings xmlns="http://xmlns.jcp.org/xml/ns/persistence/orm"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence/orm http://xmlns.jcp.org/xml/ns/persistence/orm_2_1.xsd"
+	version="2.1">
+	
+	<named-native-query name="Vendas.totalPorMes" result-set-mapping="totalPorMesMapping">
+		<query>
+			select date_format(data_criacao, '%Y/%m') mes
+				 , count(*) total
+  			from venda
+  			where data_criacao > DATE_SUB(NOW(), INTERVAL 6 MONTH)
+  			  and status = 'EMITIDA'
+			group by date_format(data_criacao, '%Y/%m')   
+			order by date_format(data_criacao, '%Y/%m') desc
+	    </query>
+	</named-native-query>
+	
+	<named-native-query name="Vendas.porOrigem" result-set-mapping="porOrigemMapping">
+		<query>
+			select date_format(v.data_criacao, '%Y/%m') mes
+				 , group_concat(distinct (select coalesce(sum(i.quantidade), 0) 
+				     from item_venda i
+				        , cerveja c
+				        , venda v1
+				     where i.codigo_venda = v1.codigo 
+				       and i.codigo_cerveja = c.codigo
+				       and c.origem = 'NACIONAL'
+				       and date_format(v1.data_criacao, '%Y/%m') = date_format(v.data_criacao, '%Y/%m')
+				   )) total_nacional
+				 , group_concat(distinct (select coalesce(sum(i.quantidade), 0)
+				     from item_venda i
+				        , cerveja c
+				        , venda v1
+				     where i.codigo_venda = v1.codigo 
+				       and i.codigo_cerveja = c.codigo
+				       and c.origem = 'INTERNACIONAL'
+				       and date_format(v1.data_criacao, '%Y/%m') = date_format(v.data_criacao, '%Y/%m')
+				   )) total_internacional
+			 from venda v
+			 where v.data_criacao > DATE_SUB(NOW(), INTERVAL 6 MONTH)
+			   and status = 'EMITIDA'
+			   group by date_format(v.data_criacao, '%Y/%m')  
+			   order by date_format(v.data_criacao, '%Y/%m') desc
+	    </query>
+	</named-native-query>
+	
+	<sql-result-set-mapping name="totalPorMesMapping">
+		<constructor-result target-class="com.algaworks.brewer.dto.VendaMes">
+			<column name="mes" class="java.lang.String"/>
+			<column name="total" class="java.lang.Integer"/>
+		</constructor-result>
+	</sql-result-set-mapping>
+	
+	<sql-result-set-mapping name="porOrigemMapping">
+		<constructor-result target-class="com.algaworks.brewer.dto.VendaOrigem">
+			<column name="mes" class="java.lang.String"/>
+			<column name="total_nacional" class="java.lang.Integer"/>
+			<column name="total_internacional" class="java.lang.Integer"/>
+		</constructor-result>
+	</sql-result-set-mapping>
+	
+</entity-mappings>
