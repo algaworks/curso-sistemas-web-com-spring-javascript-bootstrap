@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	xmlns:th="http://www.thymeleaf.org"
+	layout:decorate="~{layout/LayoutPadrao}"
+	xmlns:brewer="http://brewer.algaworks.com">
+
+<head>
+	<title>Cadastro de usuário</title>
+	
+	<link rel="stylesheet" type="text/css" th:href="@{/stylesheets/vendors/bootstrap-switch.min.css}"/>
+</head>
+
+<section layout:fragment="conteudo">
+
+	<div class="page-header">
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-xs-10">
+					<h1 th:if="${usuario.novo}">Cadastro de usuário</h1>
+					<h1 th:unless="${usuario.novo}">Edição de usuário - [[${usuario.nome}]]</h1>
+				</div>
+				
+				<div class="col-xs-2">
+					<div class="aw-page-header-controls">
+						<a class="btn  btn-default" th:href="@{/usuarios}">
+							<i class="glyphicon  glyphicon-plus-sign"></i> <span class="hidden-xs  hidden-sm">Pesquisa</span>
+						</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<div class="container-fluid">
+		<form method="POST" th:object="${usuario}" 
+				th:action="${usuario.novo} ? @{/usuarios/novo} : @{/usuarios/{codigo}(codigo=${usuario.codigo})}">
+			<brewer:message/>
+			
+			<input type="hidden" th:field="*{codigo}"/>
+			
+			<div class="row">
+				<div class="form-group  col-sm-12  bw-required" brewer:classforerror="nome">
+					<label for="nome" class="control-label">Nome</label>
+					<input type="text" class="form-control" id="nome" autofocus="autofocus" th:field="*{nome}"/>
+				</div>
+			</div>
+				
+			<div class="row">
+				<div class="form-group  col-sm-6  bw-required" brewer:classforerror="email">
+					<label for="email" class="control-label">E-mail</label>
+					<input type="text" class="form-control" id="email" th:field="*{email}"/>
+				</div>
+				
+				<div class="form-group  col-sm-3">
+					<label for="dataNascimento" class="control-label">Data de nascimento</label>
+					<input type="text" class="form-control  js-date" id="dataNascimento" th:field="*{dataNascimento}" autocomplete="off"/>
+				</div>
+			</div>
+			
+			<div class="row">
+				<div class="form-group  col-sm-3" brewer:classforerror="senha" th:classappend="${usuario.novo} ? bw-required">
+					<label for="senha" class="control-label">Senha</label> 
+					<input type="password" class="form-control" id="senha" th:field="*{senha}"/>
+				</div>
+				
+				<div class="form-group  col-sm-3" brewer:classforerror="confirmacaoSenha">
+					<label for="confirmacaoSenha" class="control-label">Confirmação de senha</label> 
+					<input type="password" class="form-control" id="confirmacaoSenha" th:field="*{confirmacaoSenha}"/>
+				</div>
+				
+				<div class="form-group  col-sm-3" th:if="${#authentication.principal.usuario.codigo != usuario.codigo}">
+					<label class="control-label">Status</label>
+					<div>
+						<input type="checkbox" class="js-status" data-size="small" data-off-color="danger" 
+							data-on-text="Ativo" data-off-text="Inativo" th:field="*{ativo}"/>
+					</div>
+				</div>
+				
+			</div>
+			
+			<div class="row">
+				<div class="form-group  col-sm-6  bw-required" brewer:classforerror="grupos">
+					<label class="control-label">Grupos</label> 
+					<div>
+						<th:block th:each="grupo : ${grupos}">
+	  						<div class="checkbox  checkbox-inline"> 
+		    					<input type="checkbox" th:value="${grupo.codigo}" th:field="*{grupos}"/>
+		    					<label th:for="${#ids.prev('grupos')}" th:text="${grupo.nome}">Administrador</label>
+	    					</div>
+	    				</th:block>
+					</div>
+				</div>
+			</div>
+			
+			<button type="submit" class="btn  btn-primary">Salvar</button>
+		</form>
+	</div>
+</section>
+
+<th:block layout:fragment="javascript-extra">
+	<script th:src="@{/javascripts/vendors/bootstrap-switch.min.js}"></script>
+	<script>
+		$('.js-status').bootstrapSwitch();
+	</script>
+</th:block>
+</html>

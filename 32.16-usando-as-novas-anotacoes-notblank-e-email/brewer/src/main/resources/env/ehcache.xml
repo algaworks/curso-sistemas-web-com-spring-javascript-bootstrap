@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ehcache:config xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xmlns:ehcache='http://www.ehcache.org/v3'
+	xsi:schemaLocation="http://www.ehcache.org/v3 http://www.ehcache.org/schema/ehcache-core-3.4.xsd">
+
+	<ehcache:cache alias="cidades">
+		<ehcache:expiry>
+			<ehcache:tti unit="seconds">10</ehcache:tti>
+		</ehcache:expiry>
+		<ehcache:resources>
+			<ehcache:heap unit="entries">3</ehcache:heap>
+		</ehcache:resources>
+	</ehcache:cache>
+</ehcache:config>

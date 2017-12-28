@@ -1,0 +1,48 @@
+.table-pesq-produto-col-preco {
+  min-width: 130px;
+  text-align: center;
+  display: none !important;
+}
+@media (min-width: 992px) {
+  .table-pesq-produto-col-preco {
+    display: block !important;
+  }
+  table.table-pesq-produto-col-preco {
+    display: table !important;
+  }
+  tr.table-pesq-produto-col-preco {
+    display: table-row !important;
+  }
+  th.table-pesq-produto-col-preco,
+  td.table-pesq-produto-col-preco {
+    display: table-cell !important;
+  }
+}
+.table-pesq-produto-col-estoque {
+  min-width: 100px;
+  text-align: center;
+  display: none !important;
+}
+@media (min-width: 992px) {
+  .table-pesq-produto-col-estoque {
+    display: block !important;
+  }
+  table.table-pesq-produto-col-estoque {
+    display: table !important;
+  }
+  tr.table-pesq-produto-col-estoque {
+    display: table-row !important;
+  }
+  th.table-pesq-produto-col-estoque,
+  td.table-pesq-produto-col-estoque {
+    display: table-cell !important;
+  }
+}
+.table-pesq-produto-col-status {
+  min-width: 100px;
+  text-align: center;
+}
+.table-pesq-produto-col-acoes {
+  min-width: 105px;
+  text-align: center;
+}

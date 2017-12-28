@@ -1,0 +1,10 @@
+<!DOCTYPE html>
+<html lang="pt"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout/LayoutSimples}">
+	
+<th:block layout:fragment="conteudo">	
+    <th:block th:replace="|fragments/erros/${status}|" />
+</th:block>
+</html>

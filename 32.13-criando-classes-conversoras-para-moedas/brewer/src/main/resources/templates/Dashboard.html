@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:data="http://www.thymeleaf.org/extras/data"
+	xmlns:brewer="http://brewer.algaworks.com"
+	layout:decorate="~{layout/LayoutPadrao}">
+
+<head>
+	<title>Dashboard</title>
+</head>
+
+<section layout:fragment="conteudo">
+
+	<div class="page-header">
+		<div class="container-fluid">
+			<h1>Dashboard</h1>
+		</div>
+	</div>
+
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-sm-4">
+				<div class="aw-box">
+					<div class="aw-box__icon">
+						<i class="fa  fa-heartbeat  fa-3x"></i>
+					</div>
+					<div class="aw-box__value">R$[[${{valorItensEstoque.valor}}]]</div>
+					<div class="aw-box__title">Valor do estoque</div>
+				</div>
+			</div>
+			
+			<div class="col-sm-4">
+				<div class="aw-box">
+					<div class="aw-box__icon">
+						<i class="fa  fa-hashtag  fa-3x"></i>
+					</div>
+					<div class="aw-box__value" th:text="${valorItensEstoque.totalItens}">123</div>
+					<div class="aw-box__title">Itens no estoque</div>
+				</div>
+			</div>
+			
+			<div class="col-sm-4">
+				<div class="aw-box">
+					<div class="aw-box__icon">
+						<i class="fa  fa-users  fa-3x"></i>
+					</div>
+					<div class="aw-box__value" th:text="${totalClientes}">9</div>
+					<div class="aw-box__title">Total de clientes</div>
+				</div>
+			</div>
+		</div>
+		
+		<div class="row">
+			<div class="col-sm-4">
+				<div class="aw-box">
+					<div class="aw-box__icon">
+						<i class="fa  fa-usd  fa-3x"></i>
+					</div>
+					<div class="aw-box__value">R$[[${{vendasNoAno}}]]</div>
+					<div class="aw-box__title">Vendas no ano</div>
+				</div>
+			</div>
+			
+			<div class="col-sm-4">
+				<div class="aw-box">
+					<div class="aw-box__icon">
+						<i class="fa  fa-signal  fa-3x"></i>
+					</div>
+					<div class="aw-box__value">R$[[${{vendasNoMes}}]]</div>
+					<div class="aw-box__title">Vendas no mês</div>
+				</div>
+			</div>
+			
+			<div class="col-sm-4">
+				<div class="aw-box">
+					<div class="aw-box__icon">
+						<i class="fa  fa-shopping-cart  fa-3x"></i>
+					</div>
+					<div class="aw-box__value">R$[[${{ticketMedio}}]]</div>
+					<div class="aw-box__title">Ticket médio</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-sm-6">
+				<div class="aw-graph-box">
+					<div class="aw-graph-box__header">
+						<h2 class="aw-graph-box__title">Vendas por mês <small>últimos 6 meses</small></h2>
+					</div>
+					<div class="aw-graph-box__content">
+						<!-- <div class="aw-graph-box__no-data">
+							<i class="fa  fa-line-chart  fa-2x"></i>
+							<span>Não há dados</span>
+						</div> -->
+						<div>
+							<canvas id="graficoVendasPorMes" height="160"></canvas>
+						</div>
+					</div>
+				</div>
+			</div>
+			
+			<div class="col-sm-6">
+				<div class="aw-graph-box">
+					<div class="aw-graph-box__header">
+						<h2 class="aw-graph-box__title">Vendas por origem <small>últimos 6 meses</small></h2>
+					</div>
+					<div class="aw-graph-box__content">
+						<!-- <div class="aw-graph-box__no-data">
+							<i class="fa  fa-line-chart  fa-2x"></i>
+							<span>Não há dados</span>
+						</div> -->
+						<div>
+							<canvas id="graficoVendasPorOrigem" height="160"></canvas>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+
+<th:block layout:fragment="javascript-extra">
+	<script th:src="@{/javascripts/vendors/Chart.min.js}"></script>
+	<script th:src="@{/javascripts/dashboard.graficos.js}"></script>
+</th:block>
+
+</html>
