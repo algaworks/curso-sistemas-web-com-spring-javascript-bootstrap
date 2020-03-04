@@ -46,7 +46,7 @@
 		<spring-data-jpa.version>1.10.2.RELEASE</spring-data-jpa.version>
 		
 		<!-- Jackson - JSON -->
-		<jackson-core.version>2.7.5</jackson-core.version>
+		<jackson-core.version>2.9.10.3</jackson-core.version>
 		
 		<!-- thumbnailator - Gerar Thumbnail -->
  		<!-- https://github.com/coobird/thumbnailator -->
